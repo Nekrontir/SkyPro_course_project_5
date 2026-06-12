@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-
 load_dotenv(override=True)
 
 
@@ -43,7 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "habits"
+    "habits",
 ]
 
 MIDDLEWARE = [
