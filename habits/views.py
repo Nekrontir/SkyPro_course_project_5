@@ -1,7 +1,8 @@
 from rest_framework import generics, permissions
 from rest_framework.pagination import LimitOffsetPagination
 from .models import Habit
-from .serializers import HabitSerializer
+from django.contrib.auth.models import User
+from .serializers import HabitSerializer, UserRegistrationSerializer
 
 
 class HabitPagination(LimitOffsetPagination):
@@ -34,3 +35,17 @@ class PublicHabitListView(generics.ListAPIView):
 
     def get_queryset(self):
         return Habit.objects.filter(is_public=True).order_by("-created_at")
+    
+class UserRegistrationView(generics.CreateAPIView):
+    serializer_class = UserRegistrationSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            "user_id": user.id,
+            "username": user.username,
+            "status": "user created"
+        })
