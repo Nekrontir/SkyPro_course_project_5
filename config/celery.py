@@ -1,11 +1,12 @@
-from celery import Celery
-from django.conf import settings
 import os
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+from celery import Celery
+from django.conf import settings
 
-app = Celery('SkyPro_course_project_5')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
-app.config_from_object('django.conf:settings', namespace='CELERY')
+app = Celery("SkyPro_course_project_5")
+
+app.config_from_object("django.conf:settings", namespace="CELERY")
 
 app.autodiscover_tasks()

@@ -1,8 +1,9 @@
+import requests
 from celery import shared_task
 from django.conf import settings
-import requests
-from habits.models import Habit
 from django.utils import timezone
+
+from habits.models import Habit
 
 
 @shared_task
@@ -18,8 +19,8 @@ def send_habit_reminders():
 
     habits = Habit.objects.all()
 
-    chat_id = settings.CHAT_ID  
-    
+    chat_id = settings.CHAT_ID
+
     for habit in habits:
         message = (
             f"Привет! Не забудь выполнить привычку:\n"

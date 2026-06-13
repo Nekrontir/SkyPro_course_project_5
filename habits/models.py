@@ -91,19 +91,13 @@ class Habit(models.Model):
 
     def clean(self):
         if self.related_habit and self.reward:
-            raise ValidationError(
-                "Нельзя одновременно выбрать связанную привычку и указать вознаграждение."
-            )
+            raise ValidationError("Нельзя одновременно выбрать связанную привычку и указать вознаграждение.")
 
         if self.is_pleasant and (self.reward or self.related_habit):
-            raise ValidationError(
-                "У приятной привычки не может быть вознаграждения или связанной привычки."
-            )
+            raise ValidationError("У приятной привычки не может быть вознаграждения или связанной привычки.")
 
         if self.related_habit and not self.related_habit.is_pleasant:
-            raise ValidationError(
-                "В связанные привычки могут попадать только привычки с признаком приятной привычки."
-            )
+            raise ValidationError("В связанные привычки могут попадать только привычки с признаком приятной привычки.")
 
     def save(self, *args, **kwargs):
         self.full_clean()

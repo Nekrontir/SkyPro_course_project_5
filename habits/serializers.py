@@ -1,5 +1,6 @@
-from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework import serializers
+
 from .models import Habit
 
 
@@ -43,19 +44,15 @@ class HabitSerializer(serializers.ModelSerializer):
 
         periodicity = data.get("periodicity", 1)
         if periodicity < 1 or periodicity > 7:
-            raise serializers.ValidationError(
-                "Нельзя выполнять привычку реже, чем 1 раз в 7 дней."
-            )
+            raise serializers.ValidationError("Нельзя выполнять привычку реже, чем 1 раз в 7 дней.")
 
         time_to_execute = data.get("time_to_execute")
         if time_to_execute > 120:
-            raise serializers.ValidationError(
-                "Время выполнения должно быть не больше 120 секунд."
-            )
+            raise serializers.ValidationError("Время выполнения должно быть не больше 120 секунд.")
 
         return data
-    
-    
+
+
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
