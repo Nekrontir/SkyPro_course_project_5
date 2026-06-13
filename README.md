@@ -156,7 +156,7 @@ celery -A config.celery beat -l info --scheduler django_celery_beat.schedulers:D
   - API привычек (CRUD, публичные привычки);
   - регистрация и авторизация (JWT);
   - задача отправки напоминаний в Telegram (с моками requests).
-- Покрытие по `coverage` ≈ **94%** (выше требуемых 80%).
+- Покрытие по `coverage` ≈ **94%**.
 
 ---
 
