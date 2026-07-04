@@ -1,7 +1,7 @@
 import requests
 from celery import shared_task
 from django.conf import settings
-from django.utils import timezone
+# from django.utils import timezone
 
 from habits.models import Habit
 
@@ -15,7 +15,7 @@ def send_habit_reminders():
     if not bot_token:
         return
 
-    today = timezone.now().date()
+    # today = timezone.now().date()
 
     habits = Habit.objects.all()
 
